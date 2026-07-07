@@ -55,28 +55,6 @@ GravityLab turns a raw app idea into a grounded product brief, feature list, and
 ---
 ## Project Structure
 
-
-gravitylab-capstone/
-├── README.md
-├── requirements.txt
-├── .env.example
-├── app/
-│   ├── _pycache_/
-│   ├── main.py
-│   ├── orchestrator.py
-│   ├── agents.py
-│   ├── mcp_client.py
-│   ├── security.py
-│   ├── skills/
-│   │   └── pitch_writer.md
-│   └── static/
-│       ├── index.html
-│       ├── app.js
-│       └── style.css
-└── screenshots/
-    └── GravityLab in action.png
-    └── security guardrails.png
-
 - `app/main.py` — FastAPI entrypoint and static file mounting
 - `app/orchestrator.py` — sequential multi-agent pipeline orchestration
 - `app/agents.py` — ADK agent definitions and fallback execution
