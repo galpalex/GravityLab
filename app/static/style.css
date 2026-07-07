@@ -1,0 +1,413 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;600;700&display=swap');
+
+/* ─── Design tokens ────────────────────────────────────────────────────────── */
+:root {
+  /* Surfaces */
+  --bg:           #0d0e18;
+  --surface-1:    #131525;   /* card background */
+  --surface-2:    #1a1d32;   /* inner panels, trace bg */
+  --surface-3:    #0f1120;   /* textarea, feature items */
+
+  /* Borders */
+  --border:       rgba(255,255,255,0.07);
+  --border-mid:   rgba(255,255,255,0.11);
+
+  /* Accent */
+  --accent:       #6366f1;   /* muted indigo — primary action */
+  --accent-soft:  rgba(99,102,241,0.12);
+  --accent-dim:   rgba(99,102,241,0.06);
+
+  /* Secondary accent — used only for section labels */
+  --label:        #818cf8;   /* lighter indigo, not neon */
+
+  /* Text */
+  --text-1:       #f1f2f6;
+  --text-2:       #9499b0;
+  --text-3:       #60637a;
+
+  /* Semantic */
+  --danger:       #f87171;
+  --danger-bg:    rgba(248,113,113,0.07);
+  --danger-border:rgba(248,113,113,0.18);
+  --warn:         #fbbf24;
+  --warn-bg:      rgba(251,191,36,0.05);
+  --ok:           #34d399;
+
+  /* Misc */
+  --radius-card:  12px;
+  --radius-sm:    7px;
+  --transition:   0.18s ease;
+}
+
+/* ─── Reset & base ──────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text-1);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* Single, very subtle radial — not two competing blobs */
+  background-image: radial-gradient(ellipse 60% 40% at 20% 0%,
+    rgba(99,102,241,0.05) 0%, transparent 70%);
+}
+
+/* ─── Layout ────────────────────────────────────────────────────────────────── */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (min-width: 920px) {
+  .grid {
+    grid-template-columns: 340px 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ─── Header ────────────────────────────────────────────────────────────────── */
+header {
+  margin-bottom: 2.75rem;
+  text-align: center;
+}
+
+header h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--text-1);
+  margin-bottom: 0.4rem;
+}
+
+/* Single accent word — much calmer than a full rainbow gradient */
+header h1 span {
+  color: var(--label);
+}
+
+header p {
+  color: var(--text-2);
+  font-size: 0.975rem;
+  font-weight: 400;
+  max-width: 540px;
+  margin: 0 auto 1rem;
+  line-height: 1.55;
+}
+
+/* ─── Course tags ───────────────────────────────────────────────────────────── */
+.course-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  background: var(--accent-dim);
+  border: 1px solid rgba(99,102,241,0.18);
+  padding: 0.28rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--label);
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.tag:hover {
+  border-color: var(--accent);
+  color: var(--text-1);
+}
+
+/* ─── Cards ─────────────────────────────────────────────────────────────────── */
+.card, .output-section, .outputs-container { min-width: 0; }
+
+.card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  overflow: hidden;
+  /* No transform hover — keeps it feeling stable/product-like */
+  transition: border-color var(--transition);
+}
+
+.card:hover { border-color: var(--border-mid); }
+
+/* Sidebar cards sit closer together */
+.sidebar .card + .card { margin-top: 1.25rem; }
+
+/* The main results card has slightly looser internal padding */
+#outputCard { padding: 1.75rem; }
+
+/* ─── Typography inside cards ────────────────────────────────────────────────── */
+h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text-1);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  /* Emoji slightly smaller than text */
+}
+
+/* ─── Textarea ───────────────────────────────────────────────────────────────── */
+.input-group { margin-bottom: 1rem; }
+
+textarea {
+  width: 100%;
+  min-height: 130px;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 0.9rem;
+  color: var(--text-1);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  resize: vertical;
+  transition: border-color var(--transition);
+}
+
+textarea::placeholder { color: var(--text-3); }
+
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+/* ─── Button ─────────────────────────────────────────────────────────────────── */
+.btn {
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid transparent;
+  padding: 0.75rem 1rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition),
+              opacity var(--transition);
+  box-shadow: 0 2px 8px rgba(99,102,241,0.22);
+  letter-spacing: 0.01em;
+}
+
+.btn:hover:not(:disabled) {
+  background: #5153d6;
+  box-shadow: 0 4px 14px rgba(99,102,241,0.32);
+}
+
+.btn:active:not(:disabled) {
+  background: #4547c9;
+  box-shadow: none;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ─── Execution trace ────────────────────────────────────────────────────────── */
+.trace-container {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 0.9rem;
+  max-height: 310px;
+  overflow-y: auto;
+  font-family: 'Menlo', 'Consolas', 'Courier New', monospace;
+  font-size: 0.775rem;
+  line-height: 1.5;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-mid) transparent;
+}
+
+.trace-line {
+  margin-bottom: 0.45rem;
+  color: var(--text-3);
+  border-left: 2px solid var(--border);
+  padding-left: 0.55rem;
+  word-break: break-word;
+}
+
+.trace-line.alert {
+  color: var(--warn);
+  border-left-color: var(--warn);
+  background: var(--warn-bg);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.trace-line.success {
+  color: var(--ok);
+  border-left-color: var(--ok);
+}
+
+/* ─── Security alert panel ────────────────────────────────────────────────────── */
+.security-summary {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  border-radius: var(--radius-card);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  display: none;
+}
+
+.security-summary h3 {
+  font-family: 'Outfit', sans-serif;
+  color: var(--danger);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.security-summary ul {
+  list-style: none;
+  padding-left: 0.25rem;
+}
+
+.security-summary li {
+  font-size: 0.85rem;
+  color: var(--text-1);
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.security-summary li::before { content: "⚠"; color: var(--warn); }
+
+/* ─── Output sections ─────────────────────────────────────────────────────────── */
+.output-section {
+  padding-bottom: 1.75rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.output-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.output-section h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.85rem;
+}
+
+/* ─── Output body (long text blocks) ─────────────────────────────────────────── */
+.output-body {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid rgba(99,102,241,0.35);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.1rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--text-1);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+/* ─── Welcome placeholder ─────────────────────────────────────────────────────── */
+#welcomeMessage {
+  color: var(--text-3);
+  text-align: center;
+  padding: 3.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* ─── Features grid ───────────────────────────────────────────────────────────── */
+.feature-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 560px) {
+  .feature-list { grid-template-columns: 1fr 1fr; }
+}
+
+.feature-item {
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.45;
+}
+
+.feature-item::before {
+  content: "▸";
+  color: var(--label);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+}
+
+/* ─── Spinner ─────────────────────────────────────────────────────────────────── */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 0.75s linear infinite;
+  margin-right: 0.45rem;
+  vertical-align: middle;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Utility ─────────────────────────────────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ─── Reduced motion ──────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GravityLab</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Gravity<span>Lab</span></h1>
+      <p>Turn a raw app idea into grounded docs, a research roadmap, a product brief, and a launch pitch.</p>
+      <div class="course-tags">
+        <span class="tag">ADK</span>
+        <span class="tag">MCP</span>
+        <span class="tag">Security</span>
+        <span class="tag">Agent Skills</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <aside class="sidebar">
+        <section class="card">
+          <h2>💡 Start Your Project</h2>
+          <div class="input-group">
+            <textarea id="ideaInput" placeholder="Describe the app idea you want GravityLab to turn into a grounded product plan..."></textarea>
+          </div>
+          <button id="runBtn" class="btn">
+            <span id="btnSpinner" class="spinner hidden"></span>
+            <span id="btnText">Run GravityLab</span>
+          </button>
+        </section>
+
+        <section class="card">
+          <h2>⚙️ Execution Trace</h2>
+          <div id="traceLog" class="trace-container">System ready. Enter an idea to trigger agents...</div>
+        </section>
+      </aside>
+
+      <main>
+        <section id="outputCard" class="card outputs-container">
+          <div id="securityAlerts" class="security-summary">
+            <h3>⚠️ Security Guardrail Triggered</h3>
+            <ul id="alertsList"></ul>
+          </div>
+
+          <div id="welcomeMessage">Generated results will appear here after the agents run.</div>
+
+          <div id="resultsContent" class="hidden">
+            <section class="output-section">
+              <h3>🔍 Grounded Documentation (Google Developer Knowledge MCP)</h3>
+              <div id="mcpGrounding" class="output-body"></div>
+            </section>
+
+            <section class="output-section">
+              <h3>🧠 Research Roadmap (ResearchAgent via ADK)</h3>
+              <div id="researchRoadmap" class="output-body"></div>
+            </section>
+
+            <section class="output-section">
+              <h3>📄 Product Brief (ProductAgent via ADK)</h3>
+              <div id="productBrief" class="output-body"></div>
+            </section>
+
+            <section class="output-section">
+              <h3>⚙️ GravityLab Platform Features</h3>
+              <p class="section-note">Capabilities of this demo app, not the generated product above.</p>
+              <div id="featuresList" class="feature-list"></div>
+            </section>
+
+            <section class="output-section">
+              <h3>🚀 Launch Pitch (LaunchAgent via Pitch Writer Skill)</h3>
+              <div id="launchPitch" class="output-body"></div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
