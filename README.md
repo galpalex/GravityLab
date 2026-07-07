@@ -35,7 +35,7 @@ GravityLab turns a raw app idea into a grounded product brief, feature list, and
 
 ### 1. ADK (Agent Development Kit)
 - **Files**: [agents.py](file:///gravitylab-capstone/app/agents.py)
-- **Demonstration**: We import and instantiate `LlmAgent` and `Runner` directly from the official Google Agent Development Kit (`google-adk`). If a Gemini API key is configured, it runs the pipeline live; if not, it triggers a robust offline fallback to guarantee a clean demo.
+- **Demonstration**: I import and instantiate `LlmAgent` and `Runner` directly from the official Google Agent Development Kit (`google-adk`). If a Gemini API key is configured, it runs the pipeline live; if not, it triggers a robust offline fallback to guarantee a clean demo.
 
 ### 2. MCP (Model Context Protocol)
 - **Files**: [mcp_client.py](file:///gravitylab-capstone/app/mcp_client.py)
